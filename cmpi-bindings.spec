@@ -1,6 +1,6 @@
 Name:           cmpi-bindings
 Version:        0.9.5
-Release:        3%{?dist}
+Release:        6%{?dist}
 Summary:        Adapter to write and run CMPI-type CIM providers
 
 Group:          Development/Libraries
@@ -57,7 +57,7 @@ cd build
 cmake -DCMAKE_INSTALL_PREFIX=%_prefix \
       -DLIB=%{_lib} \
       -DCMAKE_VERBOSE_MAKEFILE=TRUE \
-      -DCMAKE_C_FLAGS_RELEASE:STRING="%{optflags}" \
+      -DCMAKE_C_FLAGS:STRING="%{optflags}" \
       -DCMAKE_CXX_FLAGS_RELEASE:STRING="%{optflags}" \
       -DCMAKE_BUILD_TYPE=Release \
       -DCMAKE_SKIP_RPATH=1 \
@@ -89,6 +89,16 @@ rm -rf $RPM_BUILD_ROOT
 %dir %{python_sitelib}/pycim/
 
 %changelog
+* Wed Mar 19 2014 Vitezslav Crhonek <vcrhonek@redhat.com> - 0.9.5-6
+- Fix cflags propagation
+  Resolves: #1070791
+
+* Fri Jan 24 2014 Daniel Mach <dmach@redhat.com> - 0.9.5-5
+- Mass rebuild 2014-01-24
+
+* Fri Dec 27 2013 Daniel Mach <dmach@redhat.com> - 0.9.5-4
+- Mass rebuild 2013-12-27
+
 * Tue Aug 13 2013 Vitezslav Crhonek <vcrhonek@redhat.com> - 0.9.5-3
 - Fix placement of *.py[co] files
   Resolves: #921547
