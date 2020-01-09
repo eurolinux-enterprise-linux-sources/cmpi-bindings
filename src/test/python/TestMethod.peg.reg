@@ -1,0 +1,28 @@
+//////// TestMethod 
+instance of PG_ProviderModule
+{
+    Name = "TestMethod-Module"; 
+    InterfaceType = "CMPI"; 
+    InterfaceVersion = "2.0.0"; 
+    Location = "pyCmpiProvider"; 
+    Vendor = "OMC"; 
+    Version = "0.1.0"; 
+}; 
+
+instance of PG_Provider
+{
+    Name = "TestMethod"; 
+    ProviderModuleName = "TestMethod-Module"; 
+}; 
+
+instance of PG_ProviderCapabilities
+{
+    CapabilityID = "TestMethod"; 
+    ProviderModuleName = "TestMethod-Module"; 
+    ProviderName = "TestMethod"; 
+    ClassName = "Test_Method"; 
+    Namespaces = {"root/cimv2"}; 
+    ProviderType = {2,5}; // Instance, Method 
+}; 
+
+

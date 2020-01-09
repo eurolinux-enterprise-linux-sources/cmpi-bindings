@@ -1,0 +1,32 @@
+[ Description("Testing up-calls into the CIMOM from a provider")]
+class Test_UpcallAtom
+{
+
+	[Description("Kickoff the upcall test")]
+	string test_all_upcalls(
+	//return a string array of log messages
+	);
+	[Description("Send an export_indication")]
+	uint16 send_indications(
+        // number of indications to send
+        [in] uint16 num_to_send
+	//return number of indications sent
+	);
+    [Description("Reset indication count")]
+    uint16 reset_indication_count(
+    // return 0
+    );
+    [Description("Get number of indications sent")]
+    uint16 get_indication_send_count(
+    // return number of indications sent since last reset
+    );
+
+    [ Description("Get the name of the broker"), Static ]
+	string getBrokerName(); 
+};
+
+
+[ Indication ]
+class UpcallAtom_Indication : CIM_ProcessIndication
+{
+};

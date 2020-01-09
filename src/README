@@ -1,0 +1,103 @@
+Swig based CMPI bindings
+------------------------
+
+This implements a CMPI-compliant provider interface for various languages 
+via SWIG.
+
+Currently supported languages
+
+- Ruby
+- Python
+- Perl (beginning support)
+
+
+
+Implementation
+--------------
+cmpi-bindings is implemented as a single CMPI-compliant provider (per 
+supported language) that serves as a "multiplexer" to the instrumented 
+language-specific providers.
+
+Using a python provider for class Py_Foo as an example, cmpi-bindings 
+project provides a cmpi-compliant provider (libpyCmpiProvider.so) that 
+will be registered with the cimom as the provider that handles Py_Foo 
+requests.  When libpyCmpiProvider gets the request, it will then forward 
+it on to the python module that instruments the Py_Foo class.
+
+cmpi-bindings also provides supported-language-interfaces for the Provider 
+Environment and BrokerCIMOMHandle, so that providers can make "up-calls" 
+into the cimom.
+
+
+For the stack discussion below, use the following 'type' abbreviations:
+  Ruby:    rb
+  Python:  py
+  Perl:    pl
+
+The cmpi-bindings provider interfaces under CMPI consist of the following 
+stack:
+
+CIMOM
+  ->
+lib<type>CmpiProvider.so
+  ->
+cmpi_<type>wbem_bindings.<type>
+  ->
+<python:  pywbem/cim_provider2.py>
+  ->
+language-specific provider module
+
+
+
+Build / Installation
+--------------------
+The build scripts will only build the modules for which you have appropriate 
+devel packages.  It will skip any others.
+
+  Requirements
+  ------------
+  cmake 2.4 or later
+  CMPI header files, e.g. from sblim-cmpi-devel
+  python interface requires:  python-devel, pywbem-0.7.0
+  perl interface requires: ?
+  ruby interface requires: ruby-1.8 ruby-devel-1.8
+
+  Build
+  -----
+  From root of tarball's source tree, create a directory 'build' and move 
+  (cd) into that directory
+  'cmake ..'
+  'make'
+  'sudo make install'
+
+  You can pass various parameters to cmake to control the build, e.g.
+  cmake -DCMAKE_INSTALL_PREFIX=/usr/local
+        -DCMAKE_C_FLAGS_RELEASE:STRING="-Wall -O2 -g"
+        -DCMAKE_CXX_FLAGS_RELEASE:STRING="-Wall -O2 -g"
+        -DCMAKE_BUILD_TYPE=Release
+
+  Test
+  ----
+  For each language, there is a test/<language> directory.
+  Within that directory, there should be test providers, scripts that use 
+  the test providers, and scripts to register the mofs and providers with 
+  cimoms.
+
+
+Testing
+-------
+
+The test/ subdir contains a couple of tests and some sample code. If
+you have Ruby, rake, sblim-sfcb, sblim-sfcc and sfcc.gem installed,
+test/rake gives you a more complete testsuite.
+
+See test/rake/README for details.
+
+
+Language-specific documentation
+-------------------------------
+
+  Python
+  -----
+  Visit http://pywbem.wiki.sourceforge.net/Provider+Home for QuickStart Guide,
+  Tutorials, sample providers, etc.

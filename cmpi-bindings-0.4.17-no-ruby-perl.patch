@@ -1,0 +1,39 @@
+diff -up cmpi-bindings-0.5.2/swig/CMakeLists.txt.orig cmpi-bindings-0.5.2/swig/CMakeLists.txt
+--- cmpi-bindings-0.5.2/swig/CMakeLists.txt.orig	2012-05-04 15:47:18.000000000 +0200
++++ cmpi-bindings-0.5.2/swig/CMakeLists.txt	2012-05-07 09:59:33.639648918 +0200
+@@ -4,12 +4,12 @@
+ 
+ enable_testing()
+ 
+-FIND_PACKAGE(Ruby)
+-IF (RUBY_LIBRARY AND RUBY_INCLUDE_PATH)
+-  MESSAGE(STATUS "Building Ruby...")
+-  ADD_SUBDIRECTORY(ruby)
+-  OPTION( BUILD_RUBY_GEM "Build Ruby GEM" YES )
+-ENDIF (RUBY_LIBRARY AND RUBY_INCLUDE_PATH)
++#FIND_PACKAGE(Ruby)
++#IF (RUBY_LIBRARY AND RUBY_INCLUDE_PATH)
++#  MESSAGE(STATUS "Building Ruby...")
++#  ADD_SUBDIRECTORY(ruby)
++#  OPTION( BUILD_RUBY_GEM "Build Ruby GEM" YES )
++#ENDIF (RUBY_LIBRARY AND RUBY_INCLUDE_PATH)
+ 
+ FIND_PACKAGE(PythonLibs)
+ IF (PYTHON_LIBRARY)
+@@ -22,9 +22,9 @@ IF (PYTHON_LIBRARY)
+   ENDIF (PYTHON_LINK_LIBS)
+ ENDIF (PYTHON_LIBRARY)
+ 
+-FIND_PACKAGE(Perl)
+-IF (PERL_EXECUTABLE)
+-  MESSAGE(STATUS "Building Perl...")
+-  ADD_SUBDIRECTORY(perl)
+-ENDIF (PERL_EXECUTABLE)
+-    
+\ No newline at end of file
++#FIND_PACKAGE(Perl)
++#IF (PERL_EXECUTABLE)
++#  MESSAGE(STATUS "Building Perl...")
++#  ADD_SUBDIRECTORY(perl)
++#ENDIF (PERL_EXECUTABLE)
++    

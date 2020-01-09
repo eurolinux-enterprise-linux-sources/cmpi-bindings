@@ -1,0 +1,52 @@
+These are tests for the various CMPI interface functions
+
+
+Setup
+-----
+
+- Be sure you have the latest pywbem from
+  https://pywbem.svn.sourceforge.net/svnroot/pywbem/pywbem/trunk
+  (svn co https://pywbem.svn.sourceforge.net/svnroot/pywbem/pywbem/trunk pywbem)
+  
+  [Debug setup:
+   x86_64
+   # cd pywbem
+   # rm /usr/lib64/python/site-packages/pywbem/*.py
+   # ln -s `pwd`/*.py /usr/lib64/python/site-packages/pywbem/
+
+   x86
+   # cd pywbem
+   # rm /usr/lib/python/site-packages/pywbem/*.py
+   # ln -s `pwd`/*.py /usr/lib/python/site-packages/pywbem/
+  ]
+  
+
+- Create symlinks for cmpi-bindings
+  (If appropriate, substitute python2.5 with python2.4)
+
+  cd build/swig/python
+  sudo ln -s `pwd`/libpyCmpiProvider.so /usr/lib/cmpi
+  sudo ln -s `pwd`/cmpi.py /usr/lib/python2.5/site-packages
+  cd ../../..
+  cd swig/python
+  sudo ln -s `pwd`/cmpi_pywbem_bindings.py /usr/lib/python2.5/site-packages
+
+
+- Create symlinks for sfcb mof/reg
+
+  sudo ./install.sh
+  This also runs "sfcbrepos -f"
+  
+  if you are installing to test on Pegasus, use the '--op' option
+
+
+- Restart sfcbd or tog-pegasus (cimserver)
+
+
+- now run TestMethod_Test.py, TestAtomProvider_Test.py, test_assoc.py,
+  UpcallAtomTest.py, TestNullArray.py and TestIndications.py as root.
+  (they only need to run as root because they use the passwordless local unix connection).
+  (To run against Pegasus, run with option: '-u /var/run/tog-pegasus/cimxml.socket' to use the local unix connection)
+  They should all pass.
+
+  ["Property Not Found in PropertyList: uint64" is an expected error]
